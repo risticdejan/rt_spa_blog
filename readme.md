@@ -1,4 +1,4 @@
-# This is a real time single page forum app.
+# This is a blog that is a single page real-time app.
 
 ## We are going to use Pusher, Laravel, Vuejs, Vuetify, JWT, and markdown.
 

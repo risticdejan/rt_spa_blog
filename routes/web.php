@@ -11,6 +11,6 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::view('/', 'home');
+Route::view('/{params}', 'home');
+Route::view('/{params}/{params2}', 'home');
