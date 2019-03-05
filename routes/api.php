@@ -22,3 +22,6 @@ Route::group([
     Route::post('refresh', 'AuthController@refresh');
     Route::post('user', 'AuthController@user');
 });
+
+
+Route::apiResource('/post', 'PostController');

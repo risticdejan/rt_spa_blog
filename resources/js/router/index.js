@@ -10,6 +10,7 @@ import Signup from "../pages/auths/Signup";
 import NotFound from "../pages/NotFound";
 import PostAdd from "../pages/PostAdd";
 import PostList from "../pages/PostList";
+import Post from "../pages/Post";
 
 const routes = [
     {
@@ -24,10 +25,22 @@ const routes = [
         meta: { requiresAuth: false }
     },
     {
+        path: "/posts/:page",
+        name: "post-list-page",
+        component: PostList,
+        meta: { requiresAuth: false }
+    },
+    {
         path: "/post/add",
         name: "post-add",
         component: PostAdd,
         meta: { requiresAuth: true }
+    },
+    {
+        path: "/post/:id",
+        name: "post",
+        component: Post,
+        meta: { requiresAuth: false }
     },
     {
         path: "/signout",

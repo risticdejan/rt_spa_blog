@@ -3,6 +3,7 @@
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 use App\User;
+use App\Post;
 
 class DatabaseSeeder extends Seeder
 {
@@ -20,10 +21,14 @@ class DatabaseSeeder extends Seeder
             'email_verified_at' => now(),
             'remember_token' => Str::random(10),
         ]);
+
         if (! $admin->save()) {
             Log::info('Unable to create admin '.$admin->name, (array)$admin->errors());
         } else {
             Log::info('Created admin "'.$admin->name.'" <'.$admin->email.'>');
         }
+
+        factory(User::class, 9)->create();
+        factory(Post::class, 150)->create();
     }
 }
