@@ -10,6 +10,8 @@ import Signup from "../pages/auths/Signup";
 import NotFound from "../pages/NotFound";
 import PostAdd from "../pages/PostAdd";
 import PostList from "../pages/PostList";
+import PostCategoryList from "../pages/PostCategoryList";
+import PostCategory from "../pages/PostCategory";
 import Post from "../pages/Post";
 
 const routes = [
@@ -31,6 +33,18 @@ const routes = [
         meta: { requiresAuth: false }
     },
     {
+        path: "/category/:id/posts",
+        name: "category-post-list",
+        component: PostCategoryList,
+        meta: { requiresAuth: false }
+    },
+    {
+        path: "/category/:id/posts/:page",
+        name: "category-post-list-page",
+        component: PostCategoryList,
+        meta: { requiresAuth: false }
+    },
+    {
         path: "/post/add",
         name: "post-add",
         component: PostAdd,
@@ -40,6 +54,12 @@ const routes = [
         path: "/post/:id",
         name: "post",
         component: Post,
+        meta: { requiresAuth: false }
+    },
+    {
+        path: "/category/:category_id/post/:id",
+        name: "category-post",
+        component: PostCategory,
         meta: { requiresAuth: false }
     },
     {

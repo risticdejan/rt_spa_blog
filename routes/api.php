@@ -25,3 +25,6 @@ Route::group([
 
 
 Route::apiResource('/post', 'PostController');
+
+Route::get('/category', 'CategoryController@index');
+Route::get('/category/{category}/posts', 'CategoryController@posts');

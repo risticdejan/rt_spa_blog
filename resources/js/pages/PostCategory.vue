@@ -29,7 +29,7 @@ import { mapGetters } from "vuex";
 import AppCategroy from "../components/layouts/AppCategory";
 
 export default {
-  name: "Post",
+  name: "PostCategory",
   components: {
     AppCategroy
   },
@@ -44,7 +44,11 @@ export default {
         {
           text: "Posts",
           disabled: false,
-          href: "posts/" + this.$store.getters["post/current_page"]
+          href:
+            "category/" +
+            this.$route.params.category_id +
+            "/posts/" +
+            this.$store.getters["post/current_page"]
         },
         {
           text: "Post",

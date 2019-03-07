@@ -6,13 +6,14 @@
           <app-categroy></app-categroy>
         </v-flex>
         <v-flex xs12 md6>
-          <h2 class="mb-2">All Posts</h2>
-
+          <h2 class="mb-2" v-if="category">All Posts in category "{{ category.name}}"</h2>
           <ul class="post_list">
             <li v-for="post in posts" :key="post.title" class="mb-2">
               <h3>
                 <a href=" "></a>
-                <router-link :to="{ name: 'post', params: { id: post.id }}">{{ post.title }}</router-link>
+                <router-link
+                  :to="{ name: 'category-post', params: { category_id: post.category_id, id: post.id }}"
+                >{{ post.title }}</router-link>
               </h3>
               <p>{{ post.description }}</p>
             </li>
@@ -38,13 +39,14 @@ import AppCategroy from "../components/layouts/AppCategory";
 import { mapGetters } from "vuex";
 
 export default {
-  name: "PostList",
+  name: "PostCategoryList",
   components: {
     AppCategroy
   },
   data() {
     return {
-      page: 1
+      page: 1,
+      id: 0
     };
   },
   computed: {
@@ -52,31 +54,40 @@ export default {
       user: "auth/authUser",
       posts: "post/posts",
       categories: "post/categories",
+      category: "post/current_category",
       cpage: "post/current_page",
       length: "post/length"
     })
   },
   watch: {
-    "$route.params.page": function(page) {
-      this.page = page || 1;
-      this.getPosts(page);
+    "$route.params": function(params) {
+      this.page = parseInt(params.page) || 1;
+      this.id = parseInt(params.id) || 1;
+
+      this.getPostsForCategoryId(this.id, this.page);
     }
   },
   created() {
+    this.id = parseInt(this.$route.params.id) || 1;
     this.page = parseInt(this.$route.params.page) || 1;
-    this.getPosts(this.page);
+
+    this.getPostsForCategoryId(this.id, this.page);
   },
+
   methods: {
     update(val) {
       let page = parseInt(val) || 1;
 
       this.$router.push({
-        name: "post-list-page",
+        name: "category-post-list-page",
         params: { page: page }
       });
     },
-    getPosts(page) {
-      this.$store.dispatch("post/getPosts", page);
+    getPostsForCategoryId(id, page) {
+      this.$store.dispatch("post/getCategoryPosts", {
+        id: id,
+        page: page
+      });
     }
   }
 };

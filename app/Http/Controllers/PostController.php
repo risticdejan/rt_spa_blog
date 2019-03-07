@@ -25,7 +25,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        $obj =  Post::latest()->paginate(8);
+        $obj =  Post::latest()->paginate(6);
 
         return response()->json([
             'posts' => $obj->all(),

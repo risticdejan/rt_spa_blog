@@ -4,6 +4,7 @@ use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 use App\User;
 use App\Post;
+use App\Category;
 
 class DatabaseSeeder extends Seeder
 {
@@ -29,6 +30,7 @@ class DatabaseSeeder extends Seeder
         }
 
         factory(User::class, 9)->create();
+        factory(Category::class, 5)->create();
         factory(Post::class, 150)->create();
     }
 }

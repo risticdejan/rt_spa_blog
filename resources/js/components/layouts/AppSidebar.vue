@@ -42,6 +42,26 @@
       </v-list-tile>
     </v-list>
     <v-list></v-list>
+
+    <v-divider></v-divider>
+
+    <v-list subheader>
+      <v-subheader>Categories:</v-subheader>
+
+      <v-list-tile
+        v-for="category in categories"
+        :key="category.name"
+        :to="'/category/' + category.id + '/posts'"
+      >
+        <v-list-tile-action>
+          <v-icon>far fa-dot-circle</v-icon>
+        </v-list-tile-action>
+        <v-list-tile-content>
+          <v-list-tile-title v-html="category.name"></v-list-tile-title>
+        </v-list-tile-content>
+        <v-list-tile-content class="primary--text align-end">{{ category.posts_count }}</v-list-tile-content>
+      </v-list-tile>
+    </v-list>
   </v-navigation-drawer>
 </template>
 
@@ -52,7 +72,10 @@ export default {
   name: "AppSidebar",
   props: ["drawer"],
   computed: {
-    ...mapGetters({ isLogged: "auth/isLogged" }),
+    ...mapGetters({
+      isLogged: "auth/isLogged",
+      categories: "post/categories"
+    }),
     ndrawer: {
       get: function() {
         return this.drawer;
@@ -68,6 +91,9 @@ export default {
     toggleSidebar() {
       this.$emit("toggleSidebar");
     }
+  },
+  created() {
+    this.$store.dispatch("post/getCategories");
   }
 };
 </script>

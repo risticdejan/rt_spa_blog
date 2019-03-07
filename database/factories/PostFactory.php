@@ -1,7 +1,7 @@
 <?php
 
 use Faker\Generator as Faker;
-use App\Model\Category;
+use App\Category;
 use App\User;
 
 $factory->define(App\Post::class, function (Faker $faker) {
@@ -11,9 +11,12 @@ $factory->define(App\Post::class, function (Faker $faker) {
         'title' => $title,
         'slug' => str_slug($title),
         'body' => $body,
-        'description' => shortenText($body, 16),
+        'description' => shortenText($body, 26),
         'user_id' => function () {
             return User::all()->random();
+        },
+        'category_id' => function () {
+            return Category::all()->random();
         }
     ];
 });

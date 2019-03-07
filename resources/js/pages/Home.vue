@@ -3,7 +3,7 @@
     <v-container grid-list-lg fluid>
       <v-layout row wrap>
         <v-flex xs12 md3></v-flex>
-        <v-flex xs12 md9>
+        <v-flex xs12 md6>
           <h2>Home</h2>
         </v-flex>
       </v-layout>
