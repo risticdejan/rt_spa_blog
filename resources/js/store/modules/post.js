@@ -1,6 +1,7 @@
 import router from "../../router";
 
 const state = {
+    error: null,
     posts: [],
     categories: [],
     category: null,
@@ -27,6 +28,16 @@ const mutations = {
     },
     clearLength: state => {
         state.length = 1;
+    },
+    clearError: state => {
+        state.error = null;
+    },
+    setError: (state, payload) => {
+        let error =
+            typeof payload === "object"
+                ? Object.values(payload).map(item => item[0])
+                : [payload];
+        state.error = error;
     },
     setPosts: (state, payload) => {
         state.posts = payload;
@@ -90,7 +101,7 @@ const actions = {
                 });
         });
     },
-    getCategories: ({ commit }, page_nb) => {
+    getCategories: ({ commit }) => {
         const url = base_url + "api/category";
         return new Promise((resolve, reject) => {
             axios
@@ -137,10 +148,38 @@ const actions = {
                     reject(err);
                 });
         });
+    },
+    create: ({ commit, state }, payload) => {
+        const url = base_url + "api/post";
+        let config = {
+            headers: {
+                Accept: "application/json",
+                Authorization: "Bearer " + payload.token
+            }
+        };
+        return new Promise((resolve, reject) => {
+            axios
+                .post(url, payload, config)
+                .then(res => {
+                    const categories = res.data.categories;
+                    commit("setCategories", categories);
+
+                    router.push("/posts");
+
+                    resolve(res);
+                })
+                .catch(err => {
+                    const error = err.response.data.error;
+                    commit("setError", error);
+
+                    reject(err);
+                });
+        });
     }
 };
 
 const getters = {
+    error: state => state.error,
     posts: state => state.posts,
     categories: state => state.categories,
     post: state => state.post,

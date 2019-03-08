@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Post;
+use App\Category;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Validator;
 
 class PostController extends Controller
 {
@@ -52,7 +54,39 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = request(['title','description', 'category_id', 'body']);
+
+        $validator = Validator::make($data, [
+            'title' => ['required', 'string', 'max:125','unique:posts'],
+            'description' => ['required', 'string',  'max:255'],
+            'body' => ['required', 'string',  'max:3255'],
+            'category_id' => ['required']
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'error' => $validator->errors()
+            ], Response::HTTP_BAD_REQUEST);
+        }
+
+        $post = auth()->user()->posts()->create([
+            'title' => $data['title'],
+            'slug' => str_slug($data['title']),
+            'description' => $data['description'],
+            'category_id' => $data['category_id'],
+            'body' => $data['body']
+        ]);
+
+        if ($post) {
+            return response()->json([
+                'post' => $post,
+                'categories' =>  Category::withCount('posts')->latest()->get()
+            ], Response::HTTP_OK);
+        } else {
+            return response()->json([
+                'error' => 'Post didn\'t create'
+            ], Response::HTTP_BAD_REQUEST);
+        }
     }
 
     /**

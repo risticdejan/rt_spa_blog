@@ -19,13 +19,6 @@ export default {
     return {
       visibility: true
     };
-  },
-  watch: {
-    visibility(val) {
-      if (!val) {
-        this.$store.commit("clearError");
-      }
-    }
   }
 };
 </script>
