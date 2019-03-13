@@ -9,10 +9,10 @@
     </p>
     <v-breadcrumbs :items="bitems">
       <template v-slot:item="props">
-        <a
-          :href="props.item.href"
+        <router-link
+          :to="props.item.href"
           :class="[props.item.disabled && 'disabled']"
-        >{{ props.item.text }}</a>
+        >{{ props.item.text }}</router-link>
       </template>
     </v-breadcrumbs>
     <p>{{ post.body }}</p>

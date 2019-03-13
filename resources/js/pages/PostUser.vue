@@ -34,11 +34,13 @@ export default {
         {
           text: "Posts",
           disabled: false,
-          href:
-            "user/" +
-            this.$route.params.user_id +
-            "/posts/" +
-            this.$store.getters["post/current_page"]
+          href: {
+            name: "user-post-list-page",
+            params: {
+              id: this.$route.params.user_id,
+              page: this.$store.getters["post/current_page"]
+            }
+          }
         },
         {
           text: "Post",

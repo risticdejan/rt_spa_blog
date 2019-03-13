@@ -34,7 +34,10 @@ export default {
         {
           text: "Posts",
           disabled: false,
-          href: "posts/" + this.$store.getters["post/current_page"]
+          href: {
+            name: "post-list-page",
+            params: { page: this.$store.getters["post/current_page"] }
+          }
         },
         {
           text: "Post",

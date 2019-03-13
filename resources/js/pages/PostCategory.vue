@@ -34,11 +34,13 @@ export default {
         {
           text: "Posts",
           disabled: false,
-          href:
-            "category/" +
-            this.$route.params.category_id +
-            "/posts/" +
-            this.$store.getters["post/current_page"]
+          href: {
+            name: "category-post-list-page",
+            params: {
+              id: this.$route.params.category_id,
+              page: this.$store.getters["post/current_page"]
+            }
+          }
         },
         {
           text: "Post",

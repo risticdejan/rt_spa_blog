@@ -2286,7 +2286,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       return [{
         text: "Posts",
         disabled: false,
-        href: "posts/" + this.$store.getters["post/current_page"]
+        href: {
+          name: "post-list-page",
+          params: {
+            page: this.$store.getters["post/current_page"]
+          }
+        }
       }, {
         text: "Post",
         disabled: true,
@@ -2517,7 +2522,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       return [{
         text: "Posts",
         disabled: false,
-        href: "category/" + this.$route.params.category_id + "/posts/" + this.$store.getters["post/current_page"]
+        href: {
+          name: "category-post-list-page",
+          params: {
+            id: this.$route.params.category_id,
+            page: this.$store.getters["post/current_page"]
+          }
+        }
       }, {
         text: "Post",
         disabled: true,
@@ -2788,7 +2799,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       return [{
         text: "Posts",
         disabled: false,
-        href: "user/" + this.$route.params.user_id + "/posts/" + this.$store.getters["post/current_page"]
+        href: {
+          name: "user-post-list-page",
+          params: {
+            id: this.$route.params.user_id,
+            page: this.$store.getters["post/current_page"]
+          }
+        }
       }, {
         text: "Post",
         disabled: true,
@@ -46588,10 +46605,10 @@ var render = function() {
                   fn: function(props) {
                     return [
                       _c(
-                        "a",
+                        "router-link",
                         {
                           class: [props.item.disabled && "disabled"],
-                          attrs: { href: props.item.href }
+                          attrs: { to: props.item.href }
                         },
                         [_vm._v(_vm._s(props.item.text))]
                       )
@@ -46601,7 +46618,7 @@ var render = function() {
               ],
               null,
               false,
-              2227677029
+              4052408832
             )
           }),
           _vm._v(" "),
