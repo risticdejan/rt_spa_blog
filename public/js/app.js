@@ -2407,7 +2407,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           body: this.body,
           category_id: this.category
         }).then(function (res) {
-          console.log(res);
           _this.loading = false;
         }).catch(function (err) {
           _this.loading = false;

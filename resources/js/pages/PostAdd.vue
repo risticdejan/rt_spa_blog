@@ -141,7 +141,6 @@ export default {
             category_id: this.category
           })
           .then(res => {
-            console.log(res);
             this.loading = false;
           })
           .catch(err => {
