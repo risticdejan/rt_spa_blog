@@ -3,10 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Post;
+use App\User;
 use App\Category;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Validator;
+use App\Http\Resources\PostResource;
+use App\Http\Resources\UserResource;
+use App\Http\Resources\CategoryResource;
 
 class PostController extends Controller
 {
@@ -17,7 +21,7 @@ class PostController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('jwt', ['except' => ['index','show']]);
+        $this->middleware('jwt', ['except' => ['index','show','byUser']]);
     }
 
     /**
@@ -27,10 +31,10 @@ class PostController extends Controller
      */
     public function index()
     {
-        $obj =  Post::latest()->paginate(6);
+        $obj =  Post::latest()->with("user")->paginate(6);
 
         return response()->json([
-            'posts' => $obj->all(),
+            'posts' => PostResource::collection($obj),
             'current_page' => $obj->currentPage(),
             'length' => $obj->lastPage()
         ], Response::HTTP_OK);
@@ -79,8 +83,8 @@ class PostController extends Controller
 
         if ($post) {
             return response()->json([
-                'post' => $post,
-                'categories' =>  Category::withCount('posts')->latest()->get()
+                'post' => new PostResource($post),
+                'categories' =>  CategoryResource::collection(Category::withCount('posts')->latest()->get())
             ], Response::HTTP_OK);
         } else {
             return response()->json([
@@ -98,7 +102,7 @@ class PostController extends Controller
     public function show(Post $post)
     {
         return response()->json([
-            'post' => $post
+            'post' => new PostResource($post),
         ], Response::HTTP_OK);
     }
 
@@ -134,5 +138,22 @@ class PostController extends Controller
     public function destroy(Post $post)
     {
         //
+    }
+
+    /**
+     * Display all posts for user
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function byUser(User $user)
+    {
+        $obj = $user->posts()->latest()->paginate(6);
+
+        return response()->json([
+            'posts' => PostResource::collection($obj),
+            'user' => new UserResource($user),
+            'current_page' => $obj->currentPage(),
+            'length' => $obj->lastPage()
+        ], Response::HTTP_OK);
     }
 }

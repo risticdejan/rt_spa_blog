@@ -5,6 +5,7 @@ const state = {
     posts: [],
     categories: [],
     category: null,
+    user: null,
     post: null,
     current_page: 1,
     length: 1
@@ -25,6 +26,9 @@ const mutations = {
     },
     clearCurrentCategory: state => {
         state.category = null;
+    },
+    clearCurrentUser: state => {
+        state.user = null;
     },
     clearLength: state => {
         state.length = 1;
@@ -54,8 +58,21 @@ const mutations = {
     setCurrentCategory: (state, payload) => {
         state.category = payload;
     },
+    setCurrentUser: (state, payload) => {
+        state.user = payload;
+    },
     setLength: (state, payload) => {
         state.length = payload;
+    },
+    clearPost: state => {
+        state.error = null;
+        state.posts = [];
+        state.categories = [];
+        state.category = null;
+        state.user = null;
+        state.post = null;
+        state.current_page = 1;
+        state.length = 1;
     }
 };
 
@@ -149,6 +166,34 @@ const actions = {
                 });
         });
     },
+    getUserPosts: ({ commit }, params) => {
+        const url =
+            base_url + "api/user/" + params.id + "/posts?page=" + params.page;
+        return new Promise((resolve, reject) => {
+            axios
+                .get(url)
+                .then(res => {
+                    const posts = res.data.posts;
+                    const cur_page = res.data.current_page;
+                    const cur_user = res.data.user;
+                    const length = res.data.length;
+
+                    commit("setPosts", posts);
+                    commit("setCurrentPage", cur_page);
+                    commit("setCurrentUser", cur_user);
+                    commit("setLength", length);
+
+                    resolve(res);
+                })
+                .catch(err => {
+                    commit("clearPosts");
+                    commit("clearCurrentPage");
+                    commit("clearCurrentUser");
+                    commit("clearLength");
+                    reject(err);
+                });
+        });
+    },
     create: ({ commit, state }, payload) => {
         const url = base_url + "api/post";
         let config = {
@@ -185,6 +230,7 @@ const getters = {
     post: state => state.post,
     current_page: state => state.current_page,
     current_category: state => state.category,
+    current_user: state => state.user,
     length: state => state.length
 };
 

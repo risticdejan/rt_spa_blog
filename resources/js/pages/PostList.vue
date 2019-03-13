@@ -9,12 +9,17 @@
           <h2 class="mb-2">All Posts</h2>
 
           <ul class="post_list">
-            <li v-for="post in posts" :key="post.title" class="mb-2">
+            <li v-for="post in posts" :key="post.title" class="mb-4">
               <h3>
-                <a href=" "></a>
                 <router-link :to="{ name: 'post', params: { id: post.id }}">{{ post.title }}</router-link>
               </h3>
-              <p>{{ post.description }}</p>
+              <p class="stitle">Posted by
+                <router-link
+                  :to="{ name: 'user-post-list', params: { id: post.user.id }}"
+                >{{ post.user.name }}</router-link>
+                on {{ post.created_at }}.
+              </p>
+              <p class="description">{{ post.description }}</p>
             </li>
           </ul>
           <div class="text-xs-left">
@@ -89,8 +94,13 @@ export default {
   padding: 0;
 }
 
-.post_list li p {
-  color: #cccccc;
+.post_list li p.description {
+  color: #ffffff;
+}
+
+.post_list li p.stitle {
+  color: #797878;
+  margin: 5px 0;
 }
 
 @media screen and (max-width: 440px) {

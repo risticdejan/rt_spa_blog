@@ -12,6 +12,8 @@ import PostAdd from "../pages/PostAdd";
 import PostList from "../pages/PostList";
 import PostCategoryList from "../pages/PostCategoryList";
 import PostCategory from "../pages/PostCategory";
+import PostUserList from "../pages/PostUserList";
+import PostUser from "../pages/PostUser";
 import Post from "../pages/Post";
 
 const routes = [
@@ -45,6 +47,18 @@ const routes = [
         meta: { requiresAuth: false }
     },
     {
+        path: "/user/:id/posts",
+        name: "user-post-list",
+        component: PostUserList,
+        meta: { requiresAuth: false }
+    },
+    {
+        path: "/user/:id/posts/:page",
+        name: "user-post-list-page",
+        component: PostUserList,
+        meta: { requiresAuth: false }
+    },
+    {
         path: "/post/add",
         name: "post-add",
         component: PostAdd,
@@ -60,6 +74,12 @@ const routes = [
         path: "/category/:category_id/post/:id",
         name: "category-post",
         component: PostCategory,
+        meta: { requiresAuth: false }
+    },
+    {
+        path: "/user/:user_id/post/:id",
+        name: "user-post",
+        component: PostUser,
         meta: { requiresAuth: false }
     },
     {

@@ -8,6 +8,12 @@
         <v-flex xs12 md6>
           <div v-if="post">
             <h2 class="mb-2">{{ post.title }}</h2>
+            <p class="stitle">Posted by
+              <router-link
+                :to="{ name: 'user-post-list', params: { id: post.user.id }}"
+              >{{ post.user.name }}</router-link>
+              on {{ post.created_at }}.
+            </p>
             <v-breadcrumbs :items="bitems">
               <template v-slot:item="props">
                 <a
@@ -81,5 +87,10 @@ ul {
 .disabled {
   color: grey;
   pointer-events: none;
+}
+
+p.stitle {
+  color: #797878;
+  margin-bottom: 5px;
 }
 </style>

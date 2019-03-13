@@ -6,13 +6,13 @@
           <app-categroy></app-categroy>
         </v-flex>
         <v-flex xs12 md6>
-          <h2 class="mb-2" v-if="category">All Posts in category "{{ category.name}}"</h2>
+          <h2 class="mb-2" v-if="user">All Posts posted by "{{ user.name }}"</h2>
           <ul class="post_list">
             <li v-for="post in posts" :key="post.title" class="mb-4">
               <h3>
                 <a href=" "></a>
                 <router-link
-                  :to="{ name: 'category-post', params: { category_id: post.category_id, id: post.id }}"
+                  :to="{ name: 'user-post', params: { user_id: post.user.id, id: post.id }}"
                 >{{ post.title }}</router-link>
               </h3>
               <p class="stitle">Posted by
@@ -45,7 +45,7 @@ import AppCategroy from "../components/layouts/AppCategory";
 import { mapGetters } from "vuex";
 
 export default {
-  name: "PostCategoryList",
+  name: "PostUserList",
   components: {
     AppCategroy
   },
@@ -57,7 +57,7 @@ export default {
   },
   computed: {
     ...mapGetters({
-      user: "auth/authUser",
+      user: "post/current_user",
       posts: "post/posts",
       categories: "post/categories",
       category: "post/current_category",
@@ -70,14 +70,14 @@ export default {
       this.page = parseInt(params.page) || 1;
       this.id = parseInt(params.id) || 1;
 
-      this.getPostsForCategoryId(this.id, this.page);
+      this.getPostsForUserId(this.id, this.page);
     }
   },
   created() {
     this.id = parseInt(this.$route.params.id) || 1;
     this.page = parseInt(this.$route.params.page) || 1;
 
-    this.getPostsForCategoryId(this.id, this.page);
+    this.getPostsForUserId(this.id, this.page);
   },
 
   methods: {
@@ -85,12 +85,12 @@ export default {
       let page = parseInt(val) || 1;
 
       this.$router.push({
-        name: "category-post-list-page",
+        name: "user-post-list-page",
         params: { page: page }
       });
     },
-    getPostsForCategoryId(id, page) {
-      this.$store.dispatch("post/getCategoryPosts", {
+    getPostsForUserId(id, page) {
+      this.$store.dispatch("post/getUserPosts", {
         id: id,
         page: page
       });
