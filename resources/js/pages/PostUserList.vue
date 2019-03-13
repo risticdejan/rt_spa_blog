@@ -7,25 +7,30 @@
         </v-flex>
         <v-flex xs12 md6>
           <h2 class="mb-2" v-if="user">All Posts posted by "{{ user.name }}"</h2>
-          <ul class="post_list">
-            <post-list-item
-              v-for="post in posts"
-              :key="post.title"
-              class="mb-4"
-              :post="post"
-              :fLink="{ name: 'user-post', params: { user_id: post.user.id, id: post.id }}"
-              :sLink="{name: 'user-post-list',params: {id: post.user.id}}"
-            ></post-list-item>
-          </ul>
-          <div class="text-xs-left">
-            <v-pagination
-              v-model="page"
-              :length="length"
-              :total-visible="7"
-              prev-icon="fa fa-caret-left"
-              next-icon="fa fa-caret-right"
-              @input="update"
-            ></v-pagination>
+          <div v-if="posts.length">
+            <ul class="post_list">
+              <post-list-item
+                v-for="post in posts"
+                :key="post.title"
+                class="mb-4"
+                :post="post"
+                :fLink="{ name: 'user-post', params: { user_id: post.user.id, id: post.id }}"
+                :sLink="{name: 'user-post-list',params: {id: post.user.id}}"
+              ></post-list-item>
+            </ul>
+            <div class="text-xs-left">
+              <v-pagination
+                v-model="page"
+                :length="length"
+                :total-visible="7"
+                prev-icon="fa fa-caret-left"
+                next-icon="fa fa-caret-right"
+                @input="update"
+              ></v-pagination>
+            </div>
+          </div>
+          <div v-else>
+            <p>There are no posts.</p>
           </div>
         </v-flex>
       </v-layout>

@@ -101,9 +101,15 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-        return response()->json([
-            'post' => new PostResource($post),
-        ], Response::HTTP_OK);
+        if ($post) {
+            return response()->json([
+                'post' => new PostResource($post),
+            ], Response::HTTP_OK);
+        } else {
+            return response()->json([
+                'error' => "There isn't the post"
+            ], Response::HTTP_BAD_REQUEST);
+        }
     }
 
     /**

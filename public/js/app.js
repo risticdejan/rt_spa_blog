@@ -2269,6 +2269,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
 
 
 
@@ -2301,7 +2306,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   }),
   created: function created() {
     var id = parseInt(this.$route.params.id) || 0;
-    this.$store.dispatch("post/getPost", id);
+    this.$store.dispatch("post/getPost", id).then(function (res) {// console.log(res);
+    }).catch(function (err) {// console.log(err);
+    });
   }
 });
 
@@ -2505,6 +2512,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
 
 
 
@@ -2560,6 +2572,11 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+//
+//
+//
+//
+//
 //
 //
 //
@@ -2702,6 +2719,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
 
 
 
@@ -2782,6 +2804,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
 
 
 
@@ -2837,6 +2864,11 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+//
+//
+//
+//
+//
 //
 //
 //
@@ -46739,16 +46771,21 @@ var render = function() {
                 1
               ),
               _vm._v(" "),
-              _c(
-                "v-flex",
-                { attrs: { xs12: "", md6: "" } },
-                [
-                  _c("post-one", {
-                    attrs: { post: _vm.post, bitems: _vm.bitems }
-                  })
-                ],
-                1
-              )
+              _c("v-flex", { attrs: { xs12: "", md6: "" } }, [
+                _vm.post
+                  ? _c(
+                      "div",
+                      [
+                        _c("post-one", {
+                          attrs: { post: _vm.post, bitems: _vm.bitems }
+                        })
+                      ],
+                      1
+                    )
+                  : _c("div", [
+                      _c("h2", [_vm._v("The requested post was not found")])
+                    ])
+              ])
             ],
             1
           )
@@ -47050,16 +47087,21 @@ var render = function() {
                 1
               ),
               _vm._v(" "),
-              _c(
-                "v-flex",
-                { attrs: { xs12: "", md6: "" } },
-                [
-                  _c("post-one", {
-                    attrs: { post: _vm.post, bitems: _vm.bitems }
-                  })
-                ],
-                1
-              )
+              _c("v-flex", { attrs: { xs12: "", md6: "" } }, [
+                _vm.post
+                  ? _c(
+                      "div",
+                      [
+                        _c("post-one", {
+                          attrs: { post: _vm.post, bitems: _vm.bitems }
+                        })
+                      ],
+                      1
+                    )
+                  : _c("div", [
+                      _c("h2", [_vm._v("The requested post was not found")])
+                    ])
+              ])
             ],
             1
           )
@@ -47121,52 +47163,59 @@ var render = function() {
                     ])
                   : _vm._e(),
                 _vm._v(" "),
-                _c(
-                  "ul",
-                  { staticClass: "post_list" },
-                  _vm._l(_vm.posts, function(post) {
-                    return _c("post-list-item", {
-                      key: post.title,
-                      staticClass: "mb-4",
-                      attrs: {
-                        post: post,
-                        fLink: {
-                          name: "category-post",
-                          params: { category_id: post.category_id, id: post.id }
-                        },
-                        sLink: {
-                          name: "user-post-list",
-                          params: { id: post.user.id }
-                        }
-                      }
-                    })
-                  }),
-                  1
-                ),
-                _vm._v(" "),
-                _c(
-                  "div",
-                  { staticClass: "text-xs-left" },
-                  [
-                    _c("v-pagination", {
-                      attrs: {
-                        length: _vm.length,
-                        "total-visible": 7,
-                        "prev-icon": "fa fa-caret-left",
-                        "next-icon": "fa fa-caret-right"
-                      },
-                      on: { input: _vm.update },
-                      model: {
-                        value: _vm.page,
-                        callback: function($$v) {
-                          _vm.page = $$v
-                        },
-                        expression: "page"
-                      }
-                    })
-                  ],
-                  1
-                )
+                _vm.posts.length
+                  ? _c("div", [
+                      _c(
+                        "ul",
+                        { staticClass: "post_list" },
+                        _vm._l(_vm.posts, function(post) {
+                          return _c("post-list-item", {
+                            key: post.title,
+                            staticClass: "mb-4",
+                            attrs: {
+                              post: post,
+                              fLink: {
+                                name: "category-post",
+                                params: {
+                                  category_id: post.category_id,
+                                  id: post.id
+                                }
+                              },
+                              sLink: {
+                                name: "user-post-list",
+                                params: { id: post.user.id }
+                              }
+                            }
+                          })
+                        }),
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        { staticClass: "text-xs-left" },
+                        [
+                          _c("v-pagination", {
+                            attrs: {
+                              length: _vm.length,
+                              "total-visible": 7,
+                              "prev-icon": "fa fa-caret-left",
+                              "next-icon": "fa fa-caret-right"
+                            },
+                            on: { input: _vm.update },
+                            model: {
+                              value: _vm.page,
+                              callback: function($$v) {
+                                _vm.page = $$v
+                              },
+                              expression: "page"
+                            }
+                          })
+                        ],
+                        1
+                      )
+                    ])
+                  : _c("div", [_c("p", [_vm._v("There are no posts.")])])
               ])
             ],
             1
@@ -47221,49 +47270,53 @@ var render = function() {
               _c("v-flex", { attrs: { xs12: "", md6: "" } }, [
                 _c("h2", { staticClass: "mb-2" }, [_vm._v("All Posts")]),
                 _vm._v(" "),
-                _c(
-                  "ul",
-                  { staticClass: "post_list" },
-                  _vm._l(_vm.posts, function(post) {
-                    return _c("post-list-item", {
-                      key: post.title,
-                      staticClass: "mb-4",
-                      attrs: {
-                        post: post,
-                        fLink: { name: "post", params: { id: post.id } },
-                        sLink: {
-                          name: "user-post-list",
-                          params: { id: post.user.id }
-                        }
-                      }
-                    })
-                  }),
-                  1
-                ),
-                _vm._v(" "),
-                _c(
-                  "div",
-                  { staticClass: "text-xs-left" },
-                  [
-                    _c("v-pagination", {
-                      attrs: {
-                        length: _vm.length,
-                        "total-visible": 7,
-                        "prev-icon": "fa fa-caret-left",
-                        "next-icon": "fa fa-caret-right"
-                      },
-                      on: { input: _vm.update },
-                      model: {
-                        value: _vm.page,
-                        callback: function($$v) {
-                          _vm.page = $$v
-                        },
-                        expression: "page"
-                      }
-                    })
-                  ],
-                  1
-                )
+                _vm.posts.length > 0
+                  ? _c("div", [
+                      _c(
+                        "ul",
+                        { staticClass: "post_list" },
+                        _vm._l(_vm.posts, function(post) {
+                          return _c("post-list-item", {
+                            key: post.title,
+                            staticClass: "mb-4",
+                            attrs: {
+                              post: post,
+                              fLink: { name: "post", params: { id: post.id } },
+                              sLink: {
+                                name: "user-post-list",
+                                params: { id: post.user.id }
+                              }
+                            }
+                          })
+                        }),
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        { staticClass: "text-xs-left" },
+                        [
+                          _c("v-pagination", {
+                            attrs: {
+                              length: _vm.length,
+                              "total-visible": 7,
+                              "prev-icon": "fa fa-caret-left",
+                              "next-icon": "fa fa-caret-right"
+                            },
+                            on: { input: _vm.update },
+                            model: {
+                              value: _vm.page,
+                              callback: function($$v) {
+                                _vm.page = $$v
+                              },
+                              expression: "page"
+                            }
+                          })
+                        ],
+                        1
+                      )
+                    ])
+                  : _c("div", [_c("p", [_vm._v("There are no posts.")])])
               ])
             ],
             1
@@ -47315,16 +47368,21 @@ var render = function() {
                 1
               ),
               _vm._v(" "),
-              _c(
-                "v-flex",
-                { attrs: { xs12: "", md6: "" } },
-                [
-                  _c("post-one", {
-                    attrs: { post: _vm.post, bitems: _vm.bitems }
-                  })
-                ],
-                1
-              )
+              _c("v-flex", { attrs: { xs12: "", md6: "" } }, [
+                _vm.post
+                  ? _c(
+                      "div",
+                      [
+                        _c("post-one", {
+                          attrs: { post: _vm.post, bitems: _vm.bitems }
+                        })
+                      ],
+                      1
+                    )
+                  : _c("div", [
+                      _c("h2", [_vm._v("The requested post was not found")])
+                    ])
+              ])
             ],
             1
           )
@@ -47384,52 +47442,56 @@ var render = function() {
                     ])
                   : _vm._e(),
                 _vm._v(" "),
-                _c(
-                  "ul",
-                  { staticClass: "post_list" },
-                  _vm._l(_vm.posts, function(post) {
-                    return _c("post-list-item", {
-                      key: post.title,
-                      staticClass: "mb-4",
-                      attrs: {
-                        post: post,
-                        fLink: {
-                          name: "user-post",
-                          params: { user_id: post.user.id, id: post.id }
-                        },
-                        sLink: {
-                          name: "user-post-list",
-                          params: { id: post.user.id }
-                        }
-                      }
-                    })
-                  }),
-                  1
-                ),
-                _vm._v(" "),
-                _c(
-                  "div",
-                  { staticClass: "text-xs-left" },
-                  [
-                    _c("v-pagination", {
-                      attrs: {
-                        length: _vm.length,
-                        "total-visible": 7,
-                        "prev-icon": "fa fa-caret-left",
-                        "next-icon": "fa fa-caret-right"
-                      },
-                      on: { input: _vm.update },
-                      model: {
-                        value: _vm.page,
-                        callback: function($$v) {
-                          _vm.page = $$v
-                        },
-                        expression: "page"
-                      }
-                    })
-                  ],
-                  1
-                )
+                _vm.posts.length
+                  ? _c("div", [
+                      _c(
+                        "ul",
+                        { staticClass: "post_list" },
+                        _vm._l(_vm.posts, function(post) {
+                          return _c("post-list-item", {
+                            key: post.title,
+                            staticClass: "mb-4",
+                            attrs: {
+                              post: post,
+                              fLink: {
+                                name: "user-post",
+                                params: { user_id: post.user.id, id: post.id }
+                              },
+                              sLink: {
+                                name: "user-post-list",
+                                params: { id: post.user.id }
+                              }
+                            }
+                          })
+                        }),
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        { staticClass: "text-xs-left" },
+                        [
+                          _c("v-pagination", {
+                            attrs: {
+                              length: _vm.length,
+                              "total-visible": 7,
+                              "prev-icon": "fa fa-caret-left",
+                              "next-icon": "fa fa-caret-right"
+                            },
+                            on: { input: _vm.update },
+                            model: {
+                              value: _vm.page,
+                              callback: function($$v) {
+                                _vm.page = $$v
+                              },
+                              expression: "page"
+                            }
+                          })
+                        ],
+                        1
+                      )
+                    ])
+                  : _c("div", [_c("p", [_vm._v("There are no posts.")])])
               ])
             ],
             1

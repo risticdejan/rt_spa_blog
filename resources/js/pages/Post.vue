@@ -6,7 +6,12 @@
           <app-categroy></app-categroy>
         </v-flex>
         <v-flex xs12 md6>
-          <post-one :post="post" :bitems="bitems"></post-one>
+          <div v-if="post">
+            <post-one :post="post" :bitems="bitems"></post-one>
+          </div>
+          <div v-else>
+            <h2>The requested post was not found</h2>
+          </div>
         </v-flex>
       </v-layout>
     </v-container>
@@ -50,7 +55,14 @@ export default {
   created() {
     let id = parseInt(this.$route.params.id) || 0;
 
-    this.$store.dispatch("post/getPost", id);
+    this.$store
+      .dispatch("post/getPost", id)
+      .then(res => {
+        // console.log(res);
+      })
+      .catch(err => {
+        // console.log(err);
+      });
   }
 };
 </script>
