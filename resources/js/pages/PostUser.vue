@@ -6,24 +6,7 @@
           <app-categroy></app-categroy>
         </v-flex>
         <v-flex xs12 md6>
-          <div v-if="post">
-            <h2 class="mb-2">{{ post.title }}</h2>
-            <p class="stitle">Posted by
-              <router-link
-                :to="{ name: 'user-post-list', params: { id: post.user.id }}"
-              >{{ post.user.name }}</router-link>
-              on {{ post.created_at }}.
-            </p>
-            <v-breadcrumbs :items="bitems">
-              <template v-slot:item="props">
-                <a
-                  :href="props.item.href"
-                  :class="[props.item.disabled && 'disabled']"
-                >{{ props.item.text }}</a>
-              </template>
-            </v-breadcrumbs>
-            <p>{{ post.body }}</p>
-          </div>
+          <post-one :post="post" :bitems="bitems"></post-one>
         </v-flex>
       </v-layout>
     </v-container>
@@ -33,17 +16,18 @@
 <script>
 import { mapGetters } from "vuex";
 import AppCategroy from "../components/layouts/AppCategory";
+import PostOne from "../components/shared/PostOne";
 
 export default {
   name: "PostUser",
   components: {
-    AppCategroy
+    AppCategroy,
+    PostOne
   },
   computed: {
     ...mapGetters({
       user: "auth/authUser",
-      post: "post/post",
-      categories: "post/categories"
+      post: "post/post"
     }),
     bitems: function() {
       return [
@@ -72,25 +56,3 @@ export default {
 };
 </script>
 
-<style scoped>
-ul.v-breadcrumbs {
-  padding: 10px 0px;
-}
-
-ul.v-breadcrumbs a {
-  text-decoration: none;
-}
-ul {
-  padding: 0;
-}
-
-.disabled {
-  color: grey;
-  pointer-events: none;
-}
-
-p.stitle {
-  color: #797878;
-  margin-bottom: 5px;
-}
-</style>
