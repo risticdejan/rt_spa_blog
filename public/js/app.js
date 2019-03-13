@@ -1993,6 +1993,29 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/layouts/AppLoadingPage.vue?vue&type=script&lang=js&":
+/*!*********************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/layouts/AppLoadingPage.vue?vue&type=script&lang=js& ***!
+  \*********************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: "AppLoadingPage"
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/layouts/AppSidebar.vue?vue&type=script&lang=js&":
 /*!*****************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/layouts/AppSidebar.vue?vue&type=script&lang=js& ***!
@@ -2249,7 +2272,8 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 /* harmony import */ var _components_layouts_AppCategory__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/layouts/AppCategory */ "./resources/js/components/layouts/AppCategory.vue");
-/* harmony import */ var _components_shared_PostOne__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/shared/PostOne */ "./resources/js/components/shared/PostOne.vue");
+/* harmony import */ var _components_layouts_AppLoadingPage__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/layouts/AppLoadingPage */ "./resources/js/components/layouts/AppLoadingPage.vue");
+/* harmony import */ var _components_shared_PostOne__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/shared/PostOne */ "./resources/js/components/shared/PostOne.vue");
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -2274,6 +2298,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+
 
 
 
@@ -2281,11 +2309,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   name: "Post",
   components: {
     AppCategroy: _components_layouts_AppCategory__WEBPACK_IMPORTED_MODULE_1__["default"],
-    PostOne: _components_shared_PostOne__WEBPACK_IMPORTED_MODULE_2__["default"]
+    PostOne: _components_shared_PostOne__WEBPACK_IMPORTED_MODULE_3__["default"],
+    AppLoadingPage: _components_layouts_AppLoadingPage__WEBPACK_IMPORTED_MODULE_2__["default"]
   },
   computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])({
     user: "auth/authUser",
-    post: "post/post"
+    post: "post/post",
+    loading: "layout/loading"
   }), {
     bitems: function bitems() {
       return [{
@@ -2305,9 +2335,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     }
   }),
   created: function created() {
+    var _this = this;
+
     var id = parseInt(this.$route.params.id) || 0;
-    this.$store.dispatch("post/getPost", id).then(function (res) {// console.log(res);
-    }).catch(function (err) {// console.log(err);
+    this.$store.commit("layout/setLoading", false);
+    this.$store.dispatch("post/getPost", id).then(function (res) {
+      _this.$store.commit("layout/setLoading", true);
+    }).catch(function (err) {
+      _this.$store.commit("layout/setLoading", true);
     });
   }
 });
@@ -2492,7 +2527,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 /* harmony import */ var _components_layouts_AppCategory__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/layouts/AppCategory */ "./resources/js/components/layouts/AppCategory.vue");
-/* harmony import */ var _components_shared_PostOne__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/shared/PostOne */ "./resources/js/components/shared/PostOne.vue");
+/* harmony import */ var _components_layouts_AppLoadingPage__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/layouts/AppLoadingPage */ "./resources/js/components/layouts/AppLoadingPage.vue");
+/* harmony import */ var _components_shared_PostOne__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/shared/PostOne */ "./resources/js/components/shared/PostOne.vue");
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -2517,6 +2553,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+
 
 
 
@@ -2524,11 +2564,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   name: "PostCategory",
   components: {
     AppCategroy: _components_layouts_AppCategory__WEBPACK_IMPORTED_MODULE_1__["default"],
-    PostOne: _components_shared_PostOne__WEBPACK_IMPORTED_MODULE_2__["default"]
+    PostOne: _components_shared_PostOne__WEBPACK_IMPORTED_MODULE_3__["default"],
+    AppLoadingPage: _components_layouts_AppLoadingPage__WEBPACK_IMPORTED_MODULE_2__["default"]
   },
   computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])({
     user: "auth/authUser",
-    post: "post/post"
+    post: "post/post",
+    loading: "layout/loading"
   }), {
     bitems: function bitems() {
       return [{
@@ -2549,8 +2591,15 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     }
   }),
   created: function created() {
+    var _this = this;
+
     var id = parseInt(this.$route.params.id) || 0;
-    this.$store.dispatch("post/getPost", id);
+    this.$store.commit("layout/setLoading", false);
+    this.$store.dispatch("post/getPost", id).then(function (res) {
+      _this.$store.commit("layout/setLoading", true);
+    }).catch(function (err) {
+      _this.$store.commit("layout/setLoading", true);
+    });
   }
 });
 
@@ -2567,7 +2616,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_layouts_AppCategory__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../components/layouts/AppCategory */ "./resources/js/components/layouts/AppCategory.vue");
 /* harmony import */ var _components_shared_PostListItem__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/shared/PostListItem */ "./resources/js/components/shared/PostListItem.vue");
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var _components_layouts_AppLoadingPage__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/layouts/AppLoadingPage */ "./resources/js/components/layouts/AppLoadingPage.vue");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -2612,6 +2662,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+
 
 
 
@@ -2619,7 +2673,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   name: "PostCategoryList",
   components: {
     AppCategroy: _components_layouts_AppCategory__WEBPACK_IMPORTED_MODULE_0__["default"],
-    PostListItem: _components_shared_PostListItem__WEBPACK_IMPORTED_MODULE_1__["default"]
+    PostListItem: _components_shared_PostListItem__WEBPACK_IMPORTED_MODULE_1__["default"],
+    AppLoadingPage: _components_layouts_AppLoadingPage__WEBPACK_IMPORTED_MODULE_2__["default"]
   },
   data: function data() {
     return {
@@ -2627,7 +2682,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       id: 0
     };
   },
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_2__["mapGetters"])({
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_3__["mapGetters"])({
+    loading: "layout/loading",
     user: "auth/authUser",
     posts: "post/posts",
     categories: "post/categories",
@@ -2636,16 +2692,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     length: "post/length"
   })),
   watch: {
-    "$route.params": function $routeParams(params) {
-      this.page = parseInt(params.page) || 1;
-      this.id = parseInt(params.id) || 1;
-      this.getPostsForCategoryId(this.id, this.page);
-    }
+    $route: "fetchData"
   },
   created: function created() {
-    this.id = parseInt(this.$route.params.id) || 1;
-    this.page = parseInt(this.$route.params.page) || 1;
-    this.getPostsForCategoryId(this.id, this.page);
+    this.fetchData();
   },
   methods: {
     update: function update(val) {
@@ -2657,10 +2707,19 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         }
       });
     },
-    getPostsForCategoryId: function getPostsForCategoryId(id, page) {
+    fetchData: function fetchData() {
+      var _this = this;
+
+      this.id = parseInt(this.$route.params.id) || 1;
+      this.page = parseInt(this.$route.params.page) || 1;
+      this.$store.commit("layout/setLoading", false);
       this.$store.dispatch("post/getCategoryPosts", {
-        id: id,
-        page: page
+        id: this.id,
+        page: this.page
+      }).then(function (res) {
+        _this.$store.commit("layout/setLoading", true);
+      }).catch(function (err) {
+        _this.$store.commit("layout/setLoading", true);
       });
     }
   }
@@ -2679,7 +2738,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_layouts_AppCategory__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../components/layouts/AppCategory */ "./resources/js/components/layouts/AppCategory.vue");
 /* harmony import */ var _components_shared_PostListItem__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/shared/PostListItem */ "./resources/js/components/shared/PostListItem.vue");
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var _components_layouts_AppLoadingPage__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/layouts/AppLoadingPage */ "./resources/js/components/layouts/AppLoadingPage.vue");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -2724,6 +2784,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+
 
 
 
@@ -2731,14 +2795,16 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   name: "PostList",
   components: {
     AppCategroy: _components_layouts_AppCategory__WEBPACK_IMPORTED_MODULE_0__["default"],
-    PostListItem: _components_shared_PostListItem__WEBPACK_IMPORTED_MODULE_1__["default"]
+    PostListItem: _components_shared_PostListItem__WEBPACK_IMPORTED_MODULE_1__["default"],
+    AppLoadingPage: _components_layouts_AppLoadingPage__WEBPACK_IMPORTED_MODULE_2__["default"]
   },
   data: function data() {
     return {
       page: 1
     };
   },
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_2__["mapGetters"])({
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_3__["mapGetters"])({
+    loading: "layout/loading",
     user: "auth/authUser",
     posts: "post/posts",
     categories: "post/categories",
@@ -2746,14 +2812,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     length: "post/length"
   })),
   watch: {
-    "$route.params.page": function $routeParamsPage(page) {
-      this.page = page || 1;
-      this.getPosts(page);
-    }
+    $route: "fetchData"
   },
   created: function created() {
-    this.page = parseInt(this.$route.params.page) || 1;
-    this.getPosts(this.page);
+    this.fetchData();
   },
   methods: {
     update: function update(val) {
@@ -2765,8 +2827,16 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         }
       });
     },
-    getPosts: function getPosts(page) {
-      this.$store.dispatch("post/getPosts", page);
+    fetchData: function fetchData() {
+      var _this = this;
+
+      this.page = parseInt(this.$route.params.page) || 1;
+      this.$store.commit("layout/setLoading", false);
+      this.$store.dispatch("post/getPosts", this.page).then(function (res) {
+        _this.$store.commit("layout/setLoading", true);
+      }).catch(function (err) {
+        _this.$store.commit("layout/setLoading", true);
+      });
     }
   }
 });
@@ -2784,7 +2854,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 /* harmony import */ var _components_layouts_AppCategory__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/layouts/AppCategory */ "./resources/js/components/layouts/AppCategory.vue");
-/* harmony import */ var _components_shared_PostOne__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/shared/PostOne */ "./resources/js/components/shared/PostOne.vue");
+/* harmony import */ var _components_layouts_AppLoadingPage__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/layouts/AppLoadingPage */ "./resources/js/components/layouts/AppLoadingPage.vue");
+/* harmony import */ var _components_shared_PostOne__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/shared/PostOne */ "./resources/js/components/shared/PostOne.vue");
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -2809,6 +2880,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+
 
 
 
@@ -2816,11 +2891,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   name: "PostUser",
   components: {
     AppCategroy: _components_layouts_AppCategory__WEBPACK_IMPORTED_MODULE_1__["default"],
-    PostOne: _components_shared_PostOne__WEBPACK_IMPORTED_MODULE_2__["default"]
+    PostOne: _components_shared_PostOne__WEBPACK_IMPORTED_MODULE_3__["default"],
+    AppLoadingPage: _components_layouts_AppLoadingPage__WEBPACK_IMPORTED_MODULE_2__["default"]
   },
   computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])({
     user: "auth/authUser",
-    post: "post/post"
+    post: "post/post",
+    loading: "layout/loading"
   }), {
     bitems: function bitems() {
       return [{
@@ -2841,8 +2918,15 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     }
   }),
   created: function created() {
+    var _this = this;
+
     var id = parseInt(this.$route.params.id) || 0;
-    this.$store.dispatch("post/getPost", id);
+    this.$store.commit("layout/setLoading", false);
+    this.$store.dispatch("post/getPost", id).then(function (res) {
+      _this.$store.commit("layout/setLoading", true);
+    }).catch(function (err) {
+      _this.$store.commit("layout/setLoading", true);
+    });
   }
 });
 
@@ -2859,7 +2943,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_layouts_AppCategory__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../components/layouts/AppCategory */ "./resources/js/components/layouts/AppCategory.vue");
 /* harmony import */ var _components_shared_PostListItem__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/shared/PostListItem */ "./resources/js/components/shared/PostListItem.vue");
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var _components_layouts_AppLoadingPage__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/layouts/AppLoadingPage */ "./resources/js/components/layouts/AppLoadingPage.vue");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -2904,6 +2989,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+
 
 
 
@@ -2911,7 +3000,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   name: "PostUserList",
   components: {
     AppCategroy: _components_layouts_AppCategory__WEBPACK_IMPORTED_MODULE_0__["default"],
-    PostListItem: _components_shared_PostListItem__WEBPACK_IMPORTED_MODULE_1__["default"]
+    PostListItem: _components_shared_PostListItem__WEBPACK_IMPORTED_MODULE_1__["default"],
+    AppLoadingPage: _components_layouts_AppLoadingPage__WEBPACK_IMPORTED_MODULE_2__["default"]
   },
   data: function data() {
     return {
@@ -2919,7 +3009,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       id: 0
     };
   },
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_2__["mapGetters"])({
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_3__["mapGetters"])({
+    loading: "layout/loading",
     user: "post/current_user",
     posts: "post/posts",
     categories: "post/categories",
@@ -2928,16 +3019,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     length: "post/length"
   })),
   watch: {
-    "$route.params": function $routeParams(params) {
-      this.page = parseInt(params.page) || 1;
-      this.id = parseInt(params.id) || 1;
-      this.getPostsForUserId(this.id, this.page);
-    }
+    $route: "fetchData"
   },
   created: function created() {
-    this.id = parseInt(this.$route.params.id) || 1;
-    this.page = parseInt(this.$route.params.page) || 1;
-    this.getPostsForUserId(this.id, this.page);
+    this.fetchData();
   },
   methods: {
     update: function update(val) {
@@ -2949,10 +3034,19 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         }
       });
     },
-    getPostsForUserId: function getPostsForUserId(id, page) {
+    fetchData: function fetchData() {
+      var _this = this;
+
+      this.id = parseInt(this.$route.params.id) || 1;
+      this.page = parseInt(this.$route.params.page) || 1;
+      this.$store.commit("layout/setLoading", false);
       this.$store.dispatch("post/getUserPosts", {
-        id: id,
-        page: page
+        id: this.id,
+        page: this.page
+      }).then(function (res) {
+        _this.$store.commit("layout/setLoading", true);
+      }).catch(function (err) {
+        _this.$store.commit("layout/setLoading", true);
       });
     }
   }
@@ -46286,6 +46380,46 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/layouts/AppLoadingPage.vue?vue&type=template&id=62ffad7b&":
+/*!*************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/layouts/AppLoadingPage.vue?vue&type=template&id=62ffad7b& ***!
+  \*************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "v-container",
+    { attrs: { "fill-height": "", "pa-0": "" } },
+    [
+      _c(
+        "v-layout",
+        { attrs: { row: "", "justify-center": "", "align-center": "" } },
+        [
+          _c("v-progress-circular", {
+            attrs: { indeterminate: "", size: 70, width: 7, color: "secondary" }
+          })
+        ],
+        1
+      )
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/layouts/AppSidebar.vue?vue&type=template&id=214fda6c&":
 /*!*********************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/layouts/AppSidebar.vue?vue&type=template&id=214fda6c& ***!
@@ -46771,21 +46905,32 @@ var render = function() {
                 1
               ),
               _vm._v(" "),
-              _c("v-flex", { attrs: { xs12: "", md6: "" } }, [
-                _vm.post
-                  ? _c(
-                      "div",
-                      [
-                        _c("post-one", {
-                          attrs: { post: _vm.post, bitems: _vm.bitems }
-                        })
-                      ],
-                      1
-                    )
-                  : _c("div", [
-                      _c("h2", [_vm._v("The requested post was not found")])
-                    ])
-              ])
+              _c(
+                "v-flex",
+                { attrs: { xs12: "", md6: "" } },
+                [
+                  !_vm.loading
+                    ? _c("app-loading-page")
+                    : _c("dir", [
+                        _vm.post
+                          ? _c(
+                              "div",
+                              [
+                                _c("post-one", {
+                                  attrs: { post: _vm.post, bitems: _vm.bitems }
+                                })
+                              ],
+                              1
+                            )
+                          : _c("div", [
+                              _c("h2", [
+                                _vm._v("The requested post was not found")
+                              ])
+                            ])
+                      ])
+                ],
+                1
+              )
             ],
             1
           )
@@ -47087,21 +47232,32 @@ var render = function() {
                 1
               ),
               _vm._v(" "),
-              _c("v-flex", { attrs: { xs12: "", md6: "" } }, [
-                _vm.post
-                  ? _c(
-                      "div",
-                      [
-                        _c("post-one", {
-                          attrs: { post: _vm.post, bitems: _vm.bitems }
-                        })
-                      ],
-                      1
-                    )
-                  : _c("div", [
-                      _c("h2", [_vm._v("The requested post was not found")])
-                    ])
-              ])
+              _c(
+                "v-flex",
+                { attrs: { xs12: "", md6: "" } },
+                [
+                  !_vm.loading
+                    ? _c("app-loading-page")
+                    : _c("dir", [
+                        _vm.post
+                          ? _c(
+                              "div",
+                              [
+                                _c("post-one", {
+                                  attrs: { post: _vm.post, bitems: _vm.bitems }
+                                })
+                              ],
+                              1
+                            )
+                          : _c("div", [
+                              _c("h2", [
+                                _vm._v("The requested post was not found")
+                              ])
+                            ])
+                      ])
+                ],
+                1
+              )
             ],
             1
           )
@@ -47152,71 +47308,82 @@ var render = function() {
                 1
               ),
               _vm._v(" "),
-              _c("v-flex", { attrs: { xs12: "", md6: "" } }, [
-                _vm.category
-                  ? _c("h2", { staticClass: "mb-2" }, [
-                      _vm._v(
-                        'All Posts in category "' +
-                          _vm._s(_vm.category.name) +
-                          '"'
-                      )
-                    ])
-                  : _vm._e(),
-                _vm._v(" "),
-                _vm.posts.length
-                  ? _c("div", [
-                      _c(
-                        "ul",
-                        { staticClass: "post_list" },
-                        _vm._l(_vm.posts, function(post) {
-                          return _c("post-list-item", {
-                            key: post.title,
-                            staticClass: "mb-4",
-                            attrs: {
-                              post: post,
-                              fLink: {
-                                name: "category-post",
-                                params: {
-                                  category_id: post.category_id,
-                                  id: post.id
-                                }
-                              },
-                              sLink: {
-                                name: "user-post-list",
-                                params: { id: post.user.id }
-                              }
-                            }
-                          })
-                        }),
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "div",
-                        { staticClass: "text-xs-left" },
-                        [
-                          _c("v-pagination", {
-                            attrs: {
-                              length: _vm.length,
-                              "total-visible": 7,
-                              "prev-icon": "fa fa-caret-left",
-                              "next-icon": "fa fa-caret-right"
-                            },
-                            on: { input: _vm.update },
-                            model: {
-                              value: _vm.page,
-                              callback: function($$v) {
-                                _vm.page = $$v
-                              },
-                              expression: "page"
-                            }
-                          })
-                        ],
-                        1
-                      )
-                    ])
-                  : _c("div", [_c("p", [_vm._v("There are no posts.")])])
-              ])
+              _c(
+                "v-flex",
+                { attrs: { xs12: "", md6: "" } },
+                [
+                  !_vm.loading
+                    ? _c("app-loading-page")
+                    : _c("dir", [
+                        _vm.category
+                          ? _c("h2", { staticClass: "mb-2" }, [
+                              _vm._v(
+                                'All Posts in category "' +
+                                  _vm._s(_vm.category.name) +
+                                  '"'
+                              )
+                            ])
+                          : _vm._e(),
+                        _vm._v(" "),
+                        _vm.posts.length
+                          ? _c("div", [
+                              _c(
+                                "ul",
+                                { staticClass: "post_list" },
+                                _vm._l(_vm.posts, function(post) {
+                                  return _c("post-list-item", {
+                                    key: post.title,
+                                    staticClass: "mb-4",
+                                    attrs: {
+                                      post: post,
+                                      fLink: {
+                                        name: "category-post",
+                                        params: {
+                                          category_id: post.category_id,
+                                          id: post.id
+                                        }
+                                      },
+                                      sLink: {
+                                        name: "user-post-list",
+                                        params: { id: post.user.id }
+                                      }
+                                    }
+                                  })
+                                }),
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "div",
+                                { staticClass: "text-xs-left" },
+                                [
+                                  _c("v-pagination", {
+                                    attrs: {
+                                      length: _vm.length,
+                                      "total-visible": 7,
+                                      "prev-icon": "fa fa-caret-left",
+                                      "next-icon": "fa fa-caret-right"
+                                    },
+                                    on: { input: _vm.update },
+                                    model: {
+                                      value: _vm.page,
+                                      callback: function($$v) {
+                                        _vm.page = $$v
+                                      },
+                                      expression: "page"
+                                    }
+                                  })
+                                ],
+                                1
+                              )
+                            ])
+                          : _c("div", [
+                              _c("p", [_vm._v("There are no posts.")])
+                            ])
+                      ])
+                ],
+                1
+              )
             ],
             1
           )
@@ -47267,57 +47434,73 @@ var render = function() {
                 1
               ),
               _vm._v(" "),
-              _c("v-flex", { attrs: { xs12: "", md6: "" } }, [
-                _c("h2", { staticClass: "mb-2" }, [_vm._v("All Posts")]),
-                _vm._v(" "),
-                _vm.posts.length > 0
-                  ? _c("div", [
-                      _c(
-                        "ul",
-                        { staticClass: "post_list" },
-                        _vm._l(_vm.posts, function(post) {
-                          return _c("post-list-item", {
-                            key: post.title,
-                            staticClass: "mb-4",
-                            attrs: {
-                              post: post,
-                              fLink: { name: "post", params: { id: post.id } },
-                              sLink: {
-                                name: "user-post-list",
-                                params: { id: post.user.id }
-                              }
-                            }
-                          })
-                        }),
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "div",
-                        { staticClass: "text-xs-left" },
-                        [
-                          _c("v-pagination", {
-                            attrs: {
-                              length: _vm.length,
-                              "total-visible": 7,
-                              "prev-icon": "fa fa-caret-left",
-                              "next-icon": "fa fa-caret-right"
-                            },
-                            on: { input: _vm.update },
-                            model: {
-                              value: _vm.page,
-                              callback: function($$v) {
-                                _vm.page = $$v
-                              },
-                              expression: "page"
-                            }
-                          })
-                        ],
-                        1
-                      )
-                    ])
-                  : _c("div", [_c("p", [_vm._v("There are no posts.")])])
-              ])
+              _c(
+                "v-flex",
+                { attrs: { xs12: "", md6: "" } },
+                [
+                  !_vm.loading
+                    ? _c("app-loading-page")
+                    : _c("dir", [
+                        _c("h2", { staticClass: "mb-2" }, [
+                          _vm._v("All Posts")
+                        ]),
+                        _vm._v(" "),
+                        _vm.posts.length > 0
+                          ? _c("div", [
+                              _c(
+                                "ul",
+                                { staticClass: "post_list" },
+                                _vm._l(_vm.posts, function(post) {
+                                  return _c("post-list-item", {
+                                    key: post.title,
+                                    staticClass: "mb-4",
+                                    attrs: {
+                                      post: post,
+                                      fLink: {
+                                        name: "post",
+                                        params: { id: post.id }
+                                      },
+                                      sLink: {
+                                        name: "user-post-list",
+                                        params: { id: post.user.id }
+                                      }
+                                    }
+                                  })
+                                }),
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "div",
+                                { staticClass: "text-xs-left" },
+                                [
+                                  _c("v-pagination", {
+                                    attrs: {
+                                      length: _vm.length,
+                                      "total-visible": 7,
+                                      "prev-icon": "fa fa-caret-left",
+                                      "next-icon": "fa fa-caret-right"
+                                    },
+                                    on: { input: _vm.update },
+                                    model: {
+                                      value: _vm.page,
+                                      callback: function($$v) {
+                                        _vm.page = $$v
+                                      },
+                                      expression: "page"
+                                    }
+                                  })
+                                ],
+                                1
+                              )
+                            ])
+                          : _c("div", [
+                              _c("p", [_vm._v("There are no posts.")])
+                            ])
+                      ])
+                ],
+                1
+              )
             ],
             1
           )
@@ -47368,21 +47551,32 @@ var render = function() {
                 1
               ),
               _vm._v(" "),
-              _c("v-flex", { attrs: { xs12: "", md6: "" } }, [
-                _vm.post
-                  ? _c(
-                      "div",
-                      [
-                        _c("post-one", {
-                          attrs: { post: _vm.post, bitems: _vm.bitems }
-                        })
-                      ],
-                      1
-                    )
-                  : _c("div", [
-                      _c("h2", [_vm._v("The requested post was not found")])
-                    ])
-              ])
+              _c(
+                "v-flex",
+                { attrs: { xs12: "", md6: "" } },
+                [
+                  !_vm.loading
+                    ? _c("app-loading-page")
+                    : _c("dir", [
+                        _vm.post
+                          ? _c(
+                              "div",
+                              [
+                                _c("post-one", {
+                                  attrs: { post: _vm.post, bitems: _vm.bitems }
+                                })
+                              ],
+                              1
+                            )
+                          : _c("div", [
+                              _c("h2", [
+                                _vm._v("The requested post was not found")
+                              ])
+                            ])
+                      ])
+                ],
+                1
+              )
             ],
             1
           )
@@ -47433,66 +47627,82 @@ var render = function() {
                 1
               ),
               _vm._v(" "),
-              _c("v-flex", { attrs: { xs12: "", md6: "" } }, [
-                _vm.user
-                  ? _c("h2", { staticClass: "mb-2" }, [
-                      _vm._v(
-                        'All Posts posted by "' + _vm._s(_vm.user.name) + '"'
-                      )
-                    ])
-                  : _vm._e(),
-                _vm._v(" "),
-                _vm.posts.length
-                  ? _c("div", [
-                      _c(
-                        "ul",
-                        { staticClass: "post_list" },
-                        _vm._l(_vm.posts, function(post) {
-                          return _c("post-list-item", {
-                            key: post.title,
-                            staticClass: "mb-4",
-                            attrs: {
-                              post: post,
-                              fLink: {
-                                name: "user-post",
-                                params: { user_id: post.user.id, id: post.id }
-                              },
-                              sLink: {
-                                name: "user-post-list",
-                                params: { id: post.user.id }
-                              }
-                            }
-                          })
-                        }),
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "div",
-                        { staticClass: "text-xs-left" },
-                        [
-                          _c("v-pagination", {
-                            attrs: {
-                              length: _vm.length,
-                              "total-visible": 7,
-                              "prev-icon": "fa fa-caret-left",
-                              "next-icon": "fa fa-caret-right"
-                            },
-                            on: { input: _vm.update },
-                            model: {
-                              value: _vm.page,
-                              callback: function($$v) {
-                                _vm.page = $$v
-                              },
-                              expression: "page"
-                            }
-                          })
-                        ],
-                        1
-                      )
-                    ])
-                  : _c("div", [_c("p", [_vm._v("There are no posts.")])])
-              ])
+              _c(
+                "v-flex",
+                { attrs: { xs12: "", md6: "" } },
+                [
+                  !_vm.loading
+                    ? _c("app-loading-page")
+                    : _c("dir", [
+                        _vm.user
+                          ? _c("h2", { staticClass: "mb-2" }, [
+                              _vm._v(
+                                'All Posts posted by "' +
+                                  _vm._s(_vm.user.name) +
+                                  '"'
+                              )
+                            ])
+                          : _vm._e(),
+                        _vm._v(" "),
+                        _vm.posts.length
+                          ? _c("div", [
+                              _c(
+                                "ul",
+                                { staticClass: "post_list" },
+                                _vm._l(_vm.posts, function(post) {
+                                  return _c("post-list-item", {
+                                    key: post.title,
+                                    staticClass: "mb-4",
+                                    attrs: {
+                                      post: post,
+                                      fLink: {
+                                        name: "user-post",
+                                        params: {
+                                          user_id: post.user.id,
+                                          id: post.id
+                                        }
+                                      },
+                                      sLink: {
+                                        name: "user-post-list",
+                                        params: { id: post.user.id }
+                                      }
+                                    }
+                                  })
+                                }),
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "div",
+                                { staticClass: "text-xs-left" },
+                                [
+                                  _c("v-pagination", {
+                                    attrs: {
+                                      length: _vm.length,
+                                      "total-visible": 7,
+                                      "prev-icon": "fa fa-caret-left",
+                                      "next-icon": "fa fa-caret-right"
+                                    },
+                                    on: { input: _vm.update },
+                                    model: {
+                                      value: _vm.page,
+                                      callback: function($$v) {
+                                        _vm.page = $$v
+                                      },
+                                      expression: "page"
+                                    }
+                                  })
+                                ],
+                                1
+                              )
+                            ])
+                          : _c("div", [
+                              _c("p", [_vm._v("There are no posts.")])
+                            ])
+                      ])
+                ],
+                1
+              )
             ],
             1
           )
@@ -90509,6 +90719,75 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/layouts/AppLoadingPage.vue":
+/*!************************************************************!*\
+  !*** ./resources/js/components/layouts/AppLoadingPage.vue ***!
+  \************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _AppLoadingPage_vue_vue_type_template_id_62ffad7b___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./AppLoadingPage.vue?vue&type=template&id=62ffad7b& */ "./resources/js/components/layouts/AppLoadingPage.vue?vue&type=template&id=62ffad7b&");
+/* harmony import */ var _AppLoadingPage_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./AppLoadingPage.vue?vue&type=script&lang=js& */ "./resources/js/components/layouts/AppLoadingPage.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _AppLoadingPage_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _AppLoadingPage_vue_vue_type_template_id_62ffad7b___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _AppLoadingPage_vue_vue_type_template_id_62ffad7b___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/layouts/AppLoadingPage.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/layouts/AppLoadingPage.vue?vue&type=script&lang=js&":
+/*!*************************************************************************************!*\
+  !*** ./resources/js/components/layouts/AppLoadingPage.vue?vue&type=script&lang=js& ***!
+  \*************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AppLoadingPage_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./AppLoadingPage.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/layouts/AppLoadingPage.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AppLoadingPage_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/layouts/AppLoadingPage.vue?vue&type=template&id=62ffad7b&":
+/*!*******************************************************************************************!*\
+  !*** ./resources/js/components/layouts/AppLoadingPage.vue?vue&type=template&id=62ffad7b& ***!
+  \*******************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AppLoadingPage_vue_vue_type_template_id_62ffad7b___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./AppLoadingPage.vue?vue&type=template&id=62ffad7b& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/layouts/AppLoadingPage.vue?vue&type=template&id=62ffad7b&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AppLoadingPage_vue_vue_type_template_id_62ffad7b___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AppLoadingPage_vue_vue_type_template_id_62ffad7b___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
 /***/ "./resources/js/components/layouts/AppSidebar.vue":
 /*!********************************************************!*\
   !*** ./resources/js/components/layouts/AppSidebar.vue ***!
@@ -92051,7 +92330,8 @@ var getters = {
 __webpack_require__.r(__webpack_exports__);
 var state = {
   refresh: false,
-  loadingApp: false
+  loadingApp: false,
+  loading: false
 };
 var mutations = {
   setRefresh: function setRefresh(state, payload) {
@@ -92059,6 +92339,9 @@ var mutations = {
   },
   setLoadingApp: function setLoadingApp(state, payload) {
     state.loadingApp = payload;
+  },
+  setLoading: function setLoading(state, payload) {
+    state.loading = payload;
   }
 };
 var actions = null;
@@ -92068,6 +92351,9 @@ var getters = {
   },
   loadingApp: function loadingApp(state) {
     return state.loadingApp;
+  },
+  loading: function loading(state) {
+    return state.loading;
   }
 };
 /* harmony default export */ __webpack_exports__["default"] = ({

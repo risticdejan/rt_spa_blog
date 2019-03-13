@@ -6,12 +6,15 @@
           <app-categroy></app-categroy>
         </v-flex>
         <v-flex xs12 md6>
-          <div v-if="post">
-            <post-one :post="post" :bitems="bitems"></post-one>
-          </div>
-          <div v-else>
-            <h2>The requested post was not found</h2>
-          </div>
+          <app-loading-page v-if="!loading"></app-loading-page>
+          <dir v-else>
+            <div v-if="post">
+              <post-one :post="post" :bitems="bitems"></post-one>
+            </div>
+            <div v-else>
+              <h2>The requested post was not found</h2>
+            </div>
+          </dir>
         </v-flex>
       </v-layout>
     </v-container>
@@ -20,19 +23,23 @@
 
 <script>
 import { mapGetters } from "vuex";
+
 import AppCategroy from "../components/layouts/AppCategory";
+import AppLoadingPage from "../components/layouts/AppLoadingPage";
 import PostOne from "../components/shared/PostOne";
 
 export default {
   name: "Post",
   components: {
     AppCategroy,
-    PostOne
+    PostOne,
+    AppLoadingPage
   },
   computed: {
     ...mapGetters({
       user: "auth/authUser",
-      post: "post/post"
+      post: "post/post",
+      loading: "layout/loading"
     }),
     bitems: function() {
       return [
@@ -54,14 +61,14 @@ export default {
   },
   created() {
     let id = parseInt(this.$route.params.id) || 0;
-
+    this.$store.commit("layout/setLoading", false);
     this.$store
       .dispatch("post/getPost", id)
       .then(res => {
-        // console.log(res);
+        this.$store.commit("layout/setLoading", true);
       })
       .catch(err => {
-        // console.log(err);
+        this.$store.commit("layout/setLoading", true);
       });
   }
 };

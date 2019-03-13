@@ -84,6 +84,7 @@ export default {
   computed: {
     ...mapGetters({ error: "auth/error" })
   },
+
   destroyed() {
     this.$store.commit("auth/clearError");
   },
