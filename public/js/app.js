@@ -2695,7 +2695,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     $route: "fetchData"
   },
   created: function created() {
+    var _this = this;
+
     this.fetchData();
+    Echo.channel("post.create").listen("CreatePostEvent", function (e) {
+      _this.updateData();
+    });
   },
   methods: {
     update: function update(val) {
@@ -2708,7 +2713,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       });
     },
     fetchData: function fetchData() {
-      var _this = this;
+      var _this2 = this;
 
       this.id = parseInt(this.$route.params.id) || 1;
       this.page = parseInt(this.$route.params.page) || 1;
@@ -2717,10 +2722,18 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         id: this.id,
         page: this.page
       }).then(function (res) {
-        _this.$store.commit("layout/setLoading", true);
+        _this2.$store.commit("layout/setLoading", true);
       }).catch(function (err) {
-        _this.$store.commit("layout/setLoading", true);
+        _this2.$store.commit("layout/setLoading", true);
       });
+    },
+    updateData: function updateData() {
+      this.id = parseInt(this.$route.params.id) || 1;
+      this.page = parseInt(this.$route.params.page) || 1;
+      this.$store.dispatch("post/getCategoryPosts", {
+        id: this.id,
+        page: this.page
+      }).then(function (res) {}).catch(function (err) {});
     }
   }
 });
@@ -2815,7 +2828,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     $route: "fetchData"
   },
   created: function created() {
+    var _this = this;
+
     this.fetchData();
+    Echo.channel("post.create").listen("CreatePostEvent", function (e) {
+      _this.updateData();
+    });
   },
   methods: {
     update: function update(val) {
@@ -2828,15 +2846,19 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       });
     },
     fetchData: function fetchData() {
-      var _this = this;
+      var _this2 = this;
 
       this.page = parseInt(this.$route.params.page) || 1;
       this.$store.commit("layout/setLoading", false);
       this.$store.dispatch("post/getPosts", this.page).then(function (res) {
-        _this.$store.commit("layout/setLoading", true);
+        _this2.$store.commit("layout/setLoading", true);
       }).catch(function (err) {
-        _this.$store.commit("layout/setLoading", true);
+        _this2.$store.commit("layout/setLoading", true);
       });
+    },
+    updateData: function updateData() {
+      this.page = parseInt(this.$route.params.page) || 1;
+      this.$store.dispatch("post/getPosts", this.page).then(function (res) {}).catch(function (err) {});
     }
   }
 });
@@ -3022,7 +3044,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     $route: "fetchData"
   },
   created: function created() {
+    var _this = this;
+
     this.fetchData();
+    Echo.channel("post.create").listen("CreatePostEvent", function (e) {
+      _this.updateData();
+    });
   },
   methods: {
     update: function update(val) {
@@ -3035,7 +3062,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       });
     },
     fetchData: function fetchData() {
-      var _this = this;
+      var _this2 = this;
 
       this.id = parseInt(this.$route.params.id) || 1;
       this.page = parseInt(this.$route.params.page) || 1;
@@ -3044,10 +3071,18 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         id: this.id,
         page: this.page
       }).then(function (res) {
-        _this.$store.commit("layout/setLoading", true);
+        _this2.$store.commit("layout/setLoading", true);
       }).catch(function (err) {
-        _this.$store.commit("layout/setLoading", true);
+        _this2.$store.commit("layout/setLoading", true);
       });
+    },
+    updateData: function updateData() {
+      this.id = parseInt(this.$route.params.id) || 1;
+      this.page = parseInt(this.$route.params.page) || 1;
+      this.$store.dispatch("post/getUserPosts", {
+        id: this.id,
+        page: this.page
+      }).then(function (res) {}).catch(function (err) {});
     }
   }
 });

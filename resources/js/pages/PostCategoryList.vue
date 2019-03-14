@@ -77,8 +77,10 @@ export default {
   },
   created() {
     this.fetchData();
+    Echo.channel("post.create").listen("CreatePostEvent", e => {
+      this.updateData();
+    });
   },
-
   methods: {
     update(val) {
       let page = parseInt(val) || 1;
@@ -88,7 +90,6 @@ export default {
         params: { page: page }
       });
     },
-
     fetchData() {
       this.id = parseInt(this.$route.params.id) || 1;
       this.page = parseInt(this.$route.params.page) || 1;
@@ -105,6 +106,18 @@ export default {
         .catch(err => {
           this.$store.commit("layout/setLoading", true);
         });
+    },
+    updateData() {
+      this.id = parseInt(this.$route.params.id) || 1;
+      this.page = parseInt(this.$route.params.page) || 1;
+
+      this.$store
+        .dispatch("post/getCategoryPosts", {
+          id: this.id,
+          page: this.page
+        })
+        .then(res => {})
+        .catch(err => {});
     }
   }
 };

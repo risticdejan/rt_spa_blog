@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Validator;
 use App\Http\Resources\PostResource;
 use App\Http\Resources\UserResource;
 use App\Http\Resources\CategoryResource;
+use App\Events\CreatePostEvent;
 
 class PostController extends Controller
 {
@@ -82,8 +83,12 @@ class PostController extends Controller
         ]);
 
         if ($post) {
+            $postJSR = new PostResource($post);
+
+            broadcast(new CreatePostEvent($postJSR))->toOthers();
+
             return response()->json([
-                'post' => new PostResource($post),
+                'post' => new PostResource($postJSR),
                 'categories' =>  CategoryResource::collection(Category::withCount('posts')->latest()->get())
             ], Response::HTTP_OK);
         } else {
