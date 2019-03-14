@@ -68,7 +68,7 @@
                   type="submit"
                 >
                   <span slot="loader" class="custom-loader">
-                    <v-icon light>fal fa-spinner-third</v-icon>
+                    <v-icon light>fas fa-spinner</v-icon>
                   </span>
                   Create
                 </v-btn>

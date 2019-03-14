@@ -57324,7 +57324,7 @@ var render = function() {
                                     },
                                     [
                                       _c("v-icon", { attrs: { light: "" } }, [
-                                        _vm._v("fal fa-spinner-third")
+                                        _vm._v("fas fa-spinner")
                                       ])
                                     ],
                                     1
@@ -58072,7 +58072,7 @@ var render = function() {
                                 },
                                 [
                                   _c("v-icon", { attrs: { light: "" } }, [
-                                    _vm._v("fal fa-spinner-third")
+                                    _vm._v("fas fa-spinner")
                                   ])
                                 ],
                                 1
@@ -58368,7 +58368,7 @@ var render = function() {
                                 },
                                 [
                                   _c("v-icon", { attrs: { light: "" } }, [
-                                    _vm._v("fal fa-spinner-third")
+                                    _vm._v("fas fa-spinner")
                                   ])
                                 ],
                                 1
